@@ -1,10 +1,14 @@
 ﻿window.addEventListener('load', function () {
     // get the canvas element and its context
-    var canvas = document.getElementById('sketchpad');
-    var context = canvas.getContext('2d');
+    const canvas = document.getElementById('sketchpad');
+    const context = canvas.getContext('2d');
+
+
+    const colorPicker = document.getElementById('color-picker');
+    const strokeRange = document.getElementById('stroke-thickness');
 
     // create a drawer which tracks touch movements
-    var drawer = {
+    const drawer = {
         isDrawing: false,
         touchstart: function (coors) {
             context.beginPath();
@@ -14,6 +18,9 @@
         touchmove: function (coors) {
             if (this.isDrawing) {
                 context.lineTo(coors.x, coors.y);
+                context.strokeStyle = colorPicker.value;
+                context.lineWidth = strokeRange.value;
+                context.lineCap = "round";
                 context.stroke();
             }
         },
@@ -26,7 +33,7 @@
     };
     // create a function to pass touch events and coordinates to drawer
     function draw(event) {
-        var type = null;
+        let type = null;
         // map mouse events to touch events
         switch(event.type){
             case "mousedown":
@@ -56,7 +63,7 @@
         }
 
         // touchend clear the touches[0], so we need to use changedTouches[0]
-        var coors;
+        let coors;
         if(event.type === "touchend") {
             coors = {
                 x: event.changedTouches[0].pageX,
@@ -76,7 +83,7 @@
     }
 
     // detect touch capabilities
-    var touchAvailable = ('createTouch' in document) || ('ontouchstart' in window);
+    let touchAvailable = ('createTouch' in document) || ('ontouchstart' in window);
 
     // attach the touchstart, touchmove, touchend event listeners.
     if(touchAvailable){
