@@ -1,7 +1,12 @@
 ﻿const canvas = document.getElementById('sketchpad');
 const context = canvas.getContext('2d');
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
 context.fillStyle = "black";
 context.fillRect(0, 0, canvas.width, canvas.height);
+
 const colorPicker = new iro.ColorPicker('#color-picker-container', {
     width: 420,
     color: "#0066ff"
