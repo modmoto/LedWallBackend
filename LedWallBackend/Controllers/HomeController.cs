@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,16 +19,24 @@ namespace LedWallBackend.Controllers
         [HttpPost]
         public async Task<IActionResult> UploadImage([FromBody] ImageData imageData)
         {
-            string fileNameWitPath = DateTime.Now.ToString().Replace("/", "-").Replace(" ", "- ").Replace(":", "") + ".png";
-            using (FileStream fs = new FileStream(fileNameWitPath, FileMode.Create))
+            var byteBuffer = Convert.FromBase64String(imageData.ImageAsBase64);
+
+            var memoryStream = new MemoryStream(byteBuffer);
+            memoryStream.Position = 0;
+
+            var bmp = new Bitmap(memoryStream);
+
+            var matrix = new Color[bmp.Width][];
+            for (var i = 0; i <= bmp.Width - 1; i++)
             {
-                using (BinaryWriter bw = new BinaryWriter(fs))
+                matrix[i] = new Color[bmp.Height];
+                for (var j = 0; j < bmp.Height - 1; j++)
                 {
-                    byte[] data = Convert.FromBase64String(imageData.ImageAsBase64);
-                    bw.Write(data);
-                    bw.Close();
+                    matrix[i][j] = bmp.GetPixel(i, j);
                 }
             }
+
+            memoryStream.Close();
 
             return Redirect("/");
         }
