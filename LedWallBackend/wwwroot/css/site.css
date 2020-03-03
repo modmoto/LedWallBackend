@@ -13,8 +13,12 @@ canvas { display:block; }
     border-radius:100%;
     border-color: #333333;
     border-style: solid;
-    border-width: 0.3em;
-    text-align:center;
+    border-width: 5px;
+    display: table-cell;
+    text-align: center;
+    padding-top: 2.7%;
+    font-size: 3em;
+    font-weight: bold;
     box-shadow: 2px 2px 3px #999;
 }
 
@@ -23,4 +27,21 @@ canvas { display:block; }
     display: none;
     top:4%;
     right:4%;
+}
+
+.btnSendPictureToGrenke{
+    position:fixed;
+    width:11%;
+    height:21%;
+    bottom:35%;
+    right:6%;
+    padding-top: 1.8%;
+    border-radius:100%;
+    text-align: center;
+    border-color: #333333;
+    border-style: solid;
+    border-width: 5px;
+    font-size: 2em;
+    font-weight: bold;
+    box-shadow: 2px 2px 3px #999;
 }
