@@ -21,18 +21,24 @@ namespace LedWallBackend.Controllers
         {
             var byteBuffer = Convert.FromBase64String(imageData.ImageAsBase64);
 
-            var memoryStream = new MemoryStream(byteBuffer);
-            memoryStream.Position = 0;
+            var memoryStream = new MemoryStream(byteBuffer) {Position = 0};
 
             var bmp = new Bitmap(memoryStream);
 
-            var matrix = new Color[bmp.Width][];
-            for (var i = 0; i <= bmp.Width - 1; i++)
+            using (Bitmap resized = new Bitmap(400, 600, bmp.PixelFormat))
             {
-                matrix[i] = new Color[bmp.Height];
-                for (var j = 0; j < bmp.Height - 1; j++)
+                using var g = Graphics.FromImage(resized);
+                g.DrawImage(bmp, new Rectangle(Point.Empty, resized.Size));
+                var bitmapResized = new Bitmap(400, 600, g);
+
+                var matrix = new Color[bitmapResized.Width][];
+                for (var i = 0; i <= bitmapResized.Width - 1; i++)
                 {
-                    matrix[i][j] = bmp.GetPixel(i, j);
+                    matrix[i] = new Color[bitmapResized.Height];
+                    for (var j = 0; j < bitmapResized.Height - 1; j++)
+                    {
+                        matrix[i][j] = bitmapResized.GetPixel(i, j);
+                    }
                 }
             }
 

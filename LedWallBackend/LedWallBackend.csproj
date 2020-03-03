@@ -11,7 +11,7 @@
     <ItemGroup>
       <PackageReference Include="ImageProcessor.Core.CoreCompat" Version="1.3.0" />
       <PackageReference Include="runtime.osx.10.10-x64.CoreCompat.System.Drawing" Version="5.8.64" />
-      <PackageReference Include="runtime.linux-x64.CoreCompat.System.Drawing" Version="1.0.0" />
+      <PackageReference Include="runtime.linux-x64.CoreCompat.System.Drawing" Version="1.0.0-beta009" />
     </ItemGroup>
 
 
