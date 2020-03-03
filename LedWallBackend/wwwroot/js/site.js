@@ -119,15 +119,15 @@ saveButton.onclick = function uploadImage(event) {
         contentType: 'application/json; charset=utf-8'
     });
 };
-//
-// const fabButton = document.getElementById('fab-button');
-// fabButton.onclick = function openColorPicker(event) {
-//     const colorPicker = document.getElementById('color-picker');
-//     colorPicker.click();
-// };
-//
-// fabButton.style.backgroundColor = colorPicker.color;
-//
-// colorPicker.onchange = function (ev) {
-//     fabButton.style.backgroundColor = ev.target.value;
-// };
+
+const fabButton = document.getElementById('fab-button');
+fabButton.onclick = function openColorPicker(event) {
+};
+
+fabButton.style.backgroundColor = colorPicker.color.hexString;
+
+function onColorChange(color) {
+    fabButton.style.backgroundColor = color.hexString;
+}
+
+colorPicker.on('color:change', onColorChange);
