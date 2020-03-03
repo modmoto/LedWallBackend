@@ -2,7 +2,7 @@
 const context = canvas.getContext('2d');
 
 const colorPicker = new iro.ColorPicker('#color-picker-container', {
-    width: 320,
+    width: 420,
     color: "#0066ff"
 });
 const strokeRange = document.getElementById('stroke-thickness');
@@ -122,6 +122,12 @@ saveButton.onclick = function uploadImage(event) {
 
 const fabButton = document.getElementById('fab-button');
 fabButton.onclick = function openColorPicker(event) {
+    const cpContainer = document.getElementById('color-picker-container');
+    if (cpContainer.style.display === "none" || !cpContainer.style.display) {
+        cpContainer.style.display = "block";
+    } else {
+        cpContainer.style.display = "none";
+    }
 };
 
 fabButton.style.backgroundColor = colorPicker.color.hexString;

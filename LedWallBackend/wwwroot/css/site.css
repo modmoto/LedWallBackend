@@ -4,11 +4,17 @@
     height:100px;
     bottom:40px;
     right:40px;
-    color:#FFF;
     border-radius:50px;
     border-color: #333333;
     border-style: solid;
     border-width: 0.3em;
     text-align:center;
     box-shadow: 2px 2px 3px #999;
+}
+
+.fab-color-wheel{
+    position:fixed;
+    display: none;
+    top:40px;
+    right:40px;
 }
