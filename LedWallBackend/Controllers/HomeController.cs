@@ -25,7 +25,7 @@ namespace LedWallBackend.Controllers
             {
                 using (BinaryWriter bw = new BinaryWriter(fs))
                 {
-                    byte[] data = Convert.FromBase64String(imageData.Value);
+                    byte[] data = Convert.FromBase64String(imageData.ImageAsBase64);
                     bw.Write(data);
                     bw.Close();
                 }
@@ -37,6 +37,6 @@ namespace LedWallBackend.Controllers
 
     public class ImageData
     {
-        public string Value { get; set; }
+        public string ImageAsBase64 { get; set; }
     }
 }

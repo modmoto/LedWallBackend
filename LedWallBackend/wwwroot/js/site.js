@@ -1,11 +1,10 @@
-﻿window.addEventListener('load', function () {
-    // get the canvas element and its context
-    const canvas = document.getElementById('sketchpad');
-    const context = canvas.getContext('2d');
+﻿const canvas = document.getElementById('sketchpad');
+const context = canvas.getContext('2d');
 
-    const colorPicker = document.getElementById('color-picker');
-    const strokeRange = document.getElementById('stroke-thickness');
+const colorPicker = document.getElementById('color-picker');
+const strokeRange = document.getElementById('stroke-thickness');
 
+window.addEventListener('load', function () {
     // create a drawer which tracks touch movements
     const drawer = {
         isDrawing: false,
@@ -113,7 +112,19 @@ saveButton.onclick = function uploadImage(event) {
     $.ajax({
         type: 'POST',
         url: "../../Home/UploadImage",
-        data: JSON.stringify({ value: image.toString() }),
+        data: JSON.stringify({ imageAsBase64: image }),
         contentType: 'application/json; charset=utf-8'
     });
+};
+
+const fabButton = document.getElementById('fab-button');
+fabButton.onclick = function openColorPicker(event) {
+    const colorPicker = document.getElementById('color-picker');
+    colorPicker.click();
+};
+
+fabButton.style.backgroundColor = colorPicker.value;
+
+colorPicker.onchange = function (ev) {
+    fabButton.style.backgroundColor = ev.target.value;
 };
