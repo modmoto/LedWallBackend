@@ -1,7 +1,10 @@
 ﻿const canvas = document.getElementById('sketchpad');
 const context = canvas.getContext('2d');
 
-const colorPicker = document.getElementById('color-picker');
+const colorPicker = new iro.ColorPicker('#color-picker-container', {
+    width: 320,
+    color: "#0066ff"
+});
 const strokeRange = document.getElementById('stroke-thickness');
 
 window.addEventListener('load', function () {
@@ -16,7 +19,7 @@ window.addEventListener('load', function () {
         touchmove: function (coors) {
             if (this.isDrawing) {
                 context.lineTo(coors.x, coors.y);
-                context.strokeStyle = colorPicker.value;
+                context.strokeStyle = colorPicker.color.hexString;
                 context.lineWidth = strokeRange.value;
                 context.lineCap = "round";
                 context.stroke();
@@ -116,15 +119,15 @@ saveButton.onclick = function uploadImage(event) {
         contentType: 'application/json; charset=utf-8'
     });
 };
-
-const fabButton = document.getElementById('fab-button');
-fabButton.onclick = function openColorPicker(event) {
-    const colorPicker = document.getElementById('color-picker');
-    colorPicker.click();
-};
-
-fabButton.style.backgroundColor = colorPicker.value;
-
-colorPicker.onchange = function (ev) {
-    fabButton.style.backgroundColor = ev.target.value;
-};
+//
+// const fabButton = document.getElementById('fab-button');
+// fabButton.onclick = function openColorPicker(event) {
+//     const colorPicker = document.getElementById('color-picker');
+//     colorPicker.click();
+// };
+//
+// fabButton.style.backgroundColor = colorPicker.color;
+//
+// colorPicker.onchange = function (ev) {
+//     fabButton.style.backgroundColor = ev.target.value;
+// };
