@@ -1,11 +1,15 @@
 ﻿const canvas = document.getElementById('sketchpad');
 const context = canvas.getContext('2d');
 
+context.width = window.innerWidth;
+context.height = window.innerHeight;
+
 const colorPicker = new iro.ColorPicker('#color-picker-container', {
     width: 420,
     color: "#0066ff"
 });
-const strokeRange = document.getElementById('stroke-thickness');
+
+const cpContainer = document.getElementById('color-picker-container');
 
 window.addEventListener('load', function () {
     // create a drawer which tracks touch movements
@@ -20,8 +24,11 @@ window.addEventListener('load', function () {
             if (this.isDrawing) {
                 context.lineTo(coors.x, coors.y);
                 context.strokeStyle = colorPicker.color.hexString;
-                context.lineWidth = strokeRange.value;
+                context.lineWidth = 20;
                 context.lineCap = "round";
+                context.width = window.innerWidth;
+                context.height = window.innerHeight;
+
                 context.stroke();
             }
         },
@@ -122,7 +129,6 @@ saveButton.onclick = function uploadImage(event) {
 
 const fabButton = document.getElementById('fab-button');
 fabButton.onclick = function openColorPicker(event) {
-    const cpContainer = document.getElementById('color-picker-container');
     if (cpContainer.style.display === "none" || !cpContainer.style.display) {
         cpContainer.style.display = "block";
     } else {
