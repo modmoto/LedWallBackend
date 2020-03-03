@@ -3,7 +3,6 @@
     const canvas = document.getElementById('sketchpad');
     const context = canvas.getContext('2d');
 
-
     const colorPicker = document.getElementById('color-picker');
     const strokeRange = document.getElementById('stroke-thickness');
 
@@ -31,6 +30,7 @@
             }
         }
     };
+
     // create a function to pass touch events and coordinates to drawer
     function draw(event) {
         let type = null;
@@ -103,4 +103,17 @@
         event.preventDefault();
     }, false); // end body.onTouchMove
 
-}, false); // end window.onLoad
+}, false);
+
+const saveButton = document.getElementById('btnSendPictureToGrenke');
+saveButton.onclick = function uploadImage(event) {
+    let image = document.getElementById("sketchpad").toDataURL("image/png");
+    image = image.replace('data:image/png;base64,', '');
+
+    $.ajax({
+        type: 'POST',
+        url: "../../Home/UploadImage",
+        data: JSON.stringify({ value: image.toString() }),
+        contentType: 'application/json; charset=utf-8'
+    });
+};

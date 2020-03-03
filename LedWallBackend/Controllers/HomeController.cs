@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -15,5 +16,27 @@ namespace LedWallBackend.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public async Task<IActionResult> UploadImage([FromBody] ImageData imageData)
+        {
+            string fileNameWitPath = DateTime.Now.ToString().Replace("/", "-").Replace(" ", "- ").Replace(":", "") + ".png";
+            using (FileStream fs = new FileStream(fileNameWitPath, FileMode.Create))
+            {
+                using (BinaryWriter bw = new BinaryWriter(fs))
+                {
+                    byte[] data = Convert.FromBase64String(imageData.Value);
+                    bw.Write(data);
+                    bw.Close();
+                }
+            }
+
+            return Redirect("/");
+        }
+    }
+
+    public class ImageData
+    {
+        public string Value { get; set; }
     }
 }
