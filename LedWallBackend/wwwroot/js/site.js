@@ -1,9 +1,7 @@
 ﻿const canvas = document.getElementById('sketchpad');
 const context = canvas.getContext('2d');
-
-context.width = window.innerWidth;
-context.height = window.innerHeight;
-
+context.fillStyle = "black";
+context.fillRect(0, 0, canvas.width, canvas.height);
 const colorPicker = new iro.ColorPicker('#color-picker-container', {
     width: 420,
     color: "#0066ff"
@@ -24,7 +22,7 @@ window.addEventListener('load', function () {
             if (this.isDrawing) {
                 context.lineTo(coors.x, coors.y);
                 context.strokeStyle = colorPicker.color.hexString;
-                context.lineWidth = 20;
+                context.lineWidth = 30;
                 context.lineCap = "round";
                 context.width = window.innerWidth;
                 context.height = window.innerHeight;
