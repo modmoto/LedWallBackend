@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using LedWallBackend.Domain;
 using LedWallBackend.Repositories;
@@ -11,12 +12,14 @@ namespace LedWallBackend.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IGodRepository _repository;
+        private readonly IPictureRepository _repository;
 
-        public HomeController(IGodRepository repository)
+        public HomeController(IPictureRepository repository)
         {
             _repository = repository;
         }
+
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
@@ -37,8 +40,8 @@ namespace LedWallBackend.Controllers
             memoryStream.Close();
 
             var picture = Picture.Create(colors);
+            await _repository.SaveRawPictureAsync(picture.Id, imageData);
             await _repository.SavePictureAsync(picture);
-            await _repository.SaveRawPictureAsync(imageData, picture.Id);
 
             return Redirect("/");
         }
@@ -53,15 +56,15 @@ namespace LedWallBackend.Controllers
             // return bitmapResized;
         }
 
-        private static IEnumerable<IEnumerable<LedColor>> MapToColorDto(Bitmap bitmap)
+        private static Pixel[][] MapToColorDto(Bitmap bitmap)
         {
-            var matrix = new LedColor[bitmap.Width][];
+            var matrix = new Pixel[bitmap.Width][];
             for (var i = 0; i <= bitmap.Width - 1; i++)
             {
-                matrix[i] = new LedColor[bitmap.Height];
+                matrix[i] = new Pixel[bitmap.Height];
                 for (var j = 0; j < bitmap.Height - 1; j++)
                 {
-                    matrix[i][j] = new LedColor
+                    matrix[i][j] = new Pixel
                     {
                         Red = bitmap.GetPixel(i, j).R,
                         Green = bitmap.GetPixel(i, j).G,

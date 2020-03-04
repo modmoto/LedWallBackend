@@ -1,28 +1,34 @@
 using System;
-using System.Collections.Generic;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace LedWallBackend.Domain
 {
     public class Picture
     {
-        private Picture(IEnumerable<IEnumerable<LedColor>> leds, bool wasApproved, Guid id)
+        public Picture(Pixel[][] pixels, ApprovalState state, Guid id)
         {
-            Leds = leds;
-            WasApproved = wasApproved;
+            Pixels = pixels;
+            State = state;
             Id = id;
         }
 
-        public static Picture Create(IEnumerable<IEnumerable<LedColor>> leds)
+        public static Picture Create(Pixel[][] pixels)
         {
-            return new Picture(leds, false, Guid.NewGuid());
+            return new Picture(pixels, ApprovalState.Undecided, Guid.NewGuid());
         }
-        public IEnumerable<IEnumerable<LedColor>> Leds { get; }
-        public bool WasApproved { get; private set; }
+
+        public Pixel[][]Pixels { get; }
+        public ApprovalState State { get; private set; }
         public Guid Id { get; }
 
-        public void Approve()
+        public void MakeDecision(ApprovalState state)
         {
-            WasApproved = true;
+            State = state;
         }
+    }
+
+    public enum ApprovalState
+    {
+        Undecided, Approved, Rejected
     }
 }
