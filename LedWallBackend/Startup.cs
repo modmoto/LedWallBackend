@@ -1,5 +1,3 @@
-using LedWallBackend.Controllers;
-using LedWallBackend.Domain;
 using LedWallBackend.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

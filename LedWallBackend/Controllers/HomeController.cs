@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using LedWallBackend.Domain;
 using LedWallBackend.Repositories;
@@ -39,11 +37,11 @@ namespace LedWallBackend.Controllers
 
             memoryStream.Close();
 
-            var picture = Picture.Create(colors);
+            var picture = Picture.Create(imageData.ImageAsBase64);
             await _repository.SaveRawPictureAsync(picture.Id, imageData);
             await _repository.SavePictureAsync(picture);
 
-            return Redirect("/");
+            return Redirect("Home");
         }
 
         private static Bitmap ResizeBmp(Bitmap bmp, int x, int y)
