@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Threading.Tasks;
@@ -8,6 +9,12 @@ namespace LedWallBackend.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IGodRepository _repository;
+
+        public HomeController(IGodRepository repository)
+        {
+            _repository = repository;
+        }
         public IActionResult Index()
         {
             return View();
@@ -23,9 +30,12 @@ namespace LedWallBackend.Controllers
             var bmp = new Bitmap(memoryStream);
 
             var bitmapResized = ResizeBmp(bmp, 400, 600);
-            MapToColorDto(bitmapResized);
+            var colors = MapToColorDto(bitmapResized);
 
             memoryStream.Close();
+
+            var picture = Picture.Create(colors);
+            await _repository.SavePictureAsync(picture);
 
             return Redirect("/");
         }
@@ -40,22 +50,24 @@ namespace LedWallBackend.Controllers
             // return bitmapResized;
         }
 
-        private static void MapToColorDto(Bitmap bitmap)
+        private static IEnumerable<IEnumerable<LedColor>> MapToColorDto(Bitmap bitmap)
         {
-            var matrix = new Color[bitmap.Width][];
+            var matrix = new LedColor[bitmap.Width][];
             for (var i = 0; i <= bitmap.Width - 1; i++)
             {
-                matrix[i] = new Color[bitmap.Height];
+                matrix[i] = new LedColor[bitmap.Height];
                 for (var j = 0; j < bitmap.Height - 1; j++)
                 {
-                    matrix[i][j] = bitmap.GetPixel(i, j);
+                    matrix[i][j] = new LedColor
+                    {
+                        Red = bitmap.GetPixel(i, j).R,
+                        Green = bitmap.GetPixel(i, j).G,
+                        Blue = bitmap.GetPixel(i, j).B
+                    };
                 }
             }
-        }
-    }
 
-    public class ImageData
-    {
-        public string ImageAsBase64 { get; set; }
+            return matrix;
+        }
     }
 }
