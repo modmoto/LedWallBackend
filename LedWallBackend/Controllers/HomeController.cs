@@ -26,21 +26,35 @@ namespace LedWallBackend.Controllers
         [HttpPost]
         public async Task<IActionResult> UploadImage([FromBody] ImageData imageData)
         {
-            var byteBuffer = Convert.FromBase64String(imageData.ImageAsBase64);
-
-            var memoryStream = new MemoryStream(byteBuffer) {Position = 0};
-
-            var bmp = new Bitmap(memoryStream);
-
+            var bmp = ShrinkImageTo(imageData, 400, 250);
+            var base64String = ToBase64(bmp);
             var colors = MapToColorDto(bmp);
 
-            memoryStream.Close();
-
-            var picture = Picture.Create(colors, imageData.ImageAsBase64);
-            await _repository.SaveRawPictureAsync(picture.Id, imageData);
+            var picture = Picture.Create(colors, base64String);
             await _repository.SavePictureAsync(picture);
 
             return Redirect("/");
+        }
+
+        private static string ToBase64(Bitmap bmp)
+        {
+            var stream = new MemoryStream();
+            bmp.Save(stream, System.Drawing.Imaging.ImageFormat.Bmp);
+            var imageBytes = stream.ToArray();
+            var base64String = Convert.ToBase64String(imageBytes);
+            return base64String;
+        }
+
+        private static Bitmap ShrinkImageTo(ImageData imageData, int width, int height)
+        {
+            var byteBuffer = Convert.FromBase64String(imageData.ImageAsBase64);
+            var ms = new MemoryStream(byteBuffer);
+            var image = Image.FromStream(ms);
+
+            var newImage = new Bitmap(width, height);
+            Graphics.FromImage(newImage).DrawImage(image, 0, 0, width, height);
+            var bmp = new Bitmap(newImage);
+            return bmp;
         }
 
         private static Pixel[][] MapToColorDto(Bitmap bitmap)

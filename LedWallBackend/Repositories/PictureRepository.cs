@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Threading.Tasks;
 using LedWallBackend.Domain;
 using MongoDB.Driver;
@@ -21,17 +19,6 @@ namespace LedWallBackend.Repositories
         {
             var collection = _context.GetCollection<Picture>("Pictures");
             await collection.InsertOneAsync(picture);
-        }
-
-        public Task SaveRawPictureAsync(Guid id, ImageData picture)
-        {
-            var fileNameWitPath = $"{id}.png";
-            var fs = new FileStream(fileNameWitPath, FileMode.Create);
-            var bw = new BinaryWriter(fs);
-            var data = Convert.FromBase64String(picture.ImageAsBase64);
-            bw.Write(data);
-            bw.Close();
-            return Task.CompletedTask;
         }
 
         public async Task<Picture> LoadFirstUndecidedPicture()
