@@ -10,8 +10,6 @@ namespace LedWallBackend.Controllers
     {
         private readonly IPictureRepository _repository;
 
-        public Picture ApprovalPicture { get; set; }
-
         public SqlManController(IPictureRepository repository)
         {
             _repository = repository;
@@ -20,17 +18,17 @@ namespace LedWallBackend.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            ApprovalPicture = await _repository.LoadFirstUndecidedPicture();
-            return View();
+            var pic = await _repository.LoadFirstUndecidedPicture();
+            return View(pic);
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Index(string button)
+        public async Task<IActionResult> Index(Guid pictureId, string button)
         {
             var state = Enum.Parse<ApprovalState>(button);
-            ApprovalPicture.MakeDecision(state);
-            await _repository.SavePictureAsync(ApprovalPicture);
+            var pic = await _repository.LoadPicture(pictureId);
+            pic.MakeDecision(state);
+            await _repository.SavePictureAsync(pic);
             return Redirect("/");
         }
     }

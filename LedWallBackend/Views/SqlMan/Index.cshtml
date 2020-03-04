@@ -1,6 +1,15 @@
-<form>
-    <div class="form-group">
-        <button name="button" value="deny">Deny</button>
-        <button name="button" value="accept">Accept</button>
-    </div>
-</form>
+@model LedWallBackend.Domain.Picture
+@if (Model == null)
+{
+    <h2>Keine Bilder mehr</h2>
+}
+else
+{
+    <img width="100%" src="data:image/png;base64,@Model.AsBase64" alt="sorry"/>
+
+    <form method="post">
+        <input type="text" style="visibility: hidden;" name="pictureId" value="@Model.Id"/>
+        <button class="btnSendPictureToGrenke" name="button" value="Rejected">Deny</button>
+        <button class="fab-color-picker" name="button" value="Approved">Accept</button>
+    </form>
+}

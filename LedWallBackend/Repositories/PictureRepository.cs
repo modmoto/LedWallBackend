@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using LedWallBackend.Domain;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace LedWallBackend.Repositories
@@ -18,7 +20,10 @@ namespace LedWallBackend.Repositories
         public async Task SavePictureAsync(Picture picture)
         {
             var collection = _context.GetCollection<Picture>("Pictures");
-            await collection.InsertOneAsync(picture);
+            await collection.ReplaceOneAsync(
+                p => p.Id == picture.Id,
+                options: new ReplaceOptions { IsUpsert = true },
+                replacement: picture);
         }
 
         public async Task<Picture> LoadFirstUndecidedPicture()
@@ -33,6 +38,13 @@ namespace LedWallBackend.Repositories
             var collection = _context.GetCollection<Picture>("Pictures");
             var undecidedPictures = await collection.FindAsync(p => p.State == ApprovalState.Approved);
             return undecidedPictures.ToList();
+        }
+
+        public async Task<Picture> LoadPicture(Guid pictureId)
+        {
+            var collection = _context.GetCollection<Picture>("Pictures");
+            var undecidedPictures = collection.Find(p => p.Id == pictureId);
+            return await undecidedPictures.FirstOrDefaultAsync();
         }
     }
 }
