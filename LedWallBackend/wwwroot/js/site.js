@@ -107,13 +107,24 @@ window.addEventListener('load', function () {
 
 const saveButton = document.getElementById('btnSendPictureToGrenke');
 saveButton.onclick = function uploadImage(event) {
-    let image = document.getElementById("sketchpad").toDataURL("image/png");
-    image = image.replace('data:image/png;base64,', '');
+    var oc = document.createElement('canvas');
+    var octx = oc.getContext('2d');
+
+    const im = canvas.toDataURL("image/png");
+
+    oc.width = 200;
+    oc.height = 300;
+
+    var img = new Image;
+    img.src = im;
+    octx.drawImage(img,0,0);
+
+    const postImage = oc.toDataURL("image/png").replace('data:image/png;base64,', '');
 
     $.ajax({
         type: 'POST',
         url: "../../Home/UploadImage",
-        data: JSON.stringify({ imageAsBase64: image }),
+        data: JSON.stringify({ imageAsBase64: postImage }),
         contentType: 'application/json; charset=utf-8'
     });
 };

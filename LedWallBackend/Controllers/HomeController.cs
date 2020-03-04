@@ -32,26 +32,15 @@ namespace LedWallBackend.Controllers
 
             var bmp = new Bitmap(memoryStream);
 
-            var bitmapResized = ResizeBmp(bmp, 400, 600);
-            var colors = MapToColorDto(bitmapResized);
+            var colors = MapToColorDto(bmp);
 
             memoryStream.Close();
 
-            var picture = Picture.Create(imageData.ImageAsBase64);
+            var picture = Picture.Create(colors, imageData.ImageAsBase64);
             await _repository.SaveRawPictureAsync(picture.Id, imageData);
             await _repository.SavePictureAsync(picture);
 
-            return Redirect("Home");
-        }
-
-        private static Bitmap ResizeBmp(Bitmap bmp, int x, int y)
-        {
-            return bmp;
-            // var resized = new Bitmap(x, y, bmp.PixelFormat);
-            // using var g = Graphics.FromImage(resized);
-            // g.DrawImage(bmp, new Rectangle(Point.Empty, resized.Size));
-            // var bitmapResized = new Bitmap(x, y, g);
-            // return bitmapResized;
+            return Redirect("/");
         }
 
         private static Pixel[][] MapToColorDto(Bitmap bitmap)
