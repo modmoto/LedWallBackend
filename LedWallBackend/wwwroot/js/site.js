@@ -15,7 +15,6 @@ const colorPicker = new iro.ColorPicker('#color-picker-container', {
 const cpContainer = document.getElementById('color-picker-container');
 
 window.addEventListener('load', function () {
-    // create a drawer which tracks touch movements
     const drawer = {
         isDrawing: false,
         touchstart: function (coors) {
@@ -41,10 +40,8 @@ window.addEventListener('load', function () {
         }
     };
 
-    // create a function to pass touch events and coordinates to drawer
     function draw(event) {
         let type = null;
-        // map mouse events to touch events
         switch(event.type){
             case "mousedown":
                 event.touches = [];
@@ -72,7 +69,6 @@ window.addEventListener('load', function () {
                 break;
         }
 
-        // touchend clear the touches[0], so we need to use changedTouches[0]
         let coors;
         if(event.type === "touchend") {
             coors = {
@@ -81,37 +77,31 @@ window.addEventListener('load', function () {
             };
         }
         else {
-            // get the touch coordinates
             coors = {
                 x: event.touches[0].pageX,
                 y: event.touches[0].pageY
             };
         }
-        type = type || event.type
-        // pass the coordinates to the appropriate handler
+        type = type || event.type;
         drawer[type](coors);
     }
 
-    // detect touch capabilities
     let touchAvailable = ('createTouch' in document) || ('ontouchstart' in window);
 
-    // attach the touchstart, touchmove, touchend event listeners.
     if(touchAvailable){
         canvas.addEventListener('touchstart', draw, false);
         canvas.addEventListener('touchmove', draw, false);
         canvas.addEventListener('touchend', draw, false);
     }
-    // attach the mousedown, mousemove, mouseup event listeners.
     else {
         canvas.addEventListener('mousedown', draw, false);
         canvas.addEventListener('mousemove', draw, false);
         canvas.addEventListener('mouseup', draw, false);
     }
 
-    // prevent elastic scrolling
     document.body.addEventListener('touchmove', function (event) {
         event.preventDefault();
-    }, false); // end body.onTouchMove
+    }, false);
 
 }, false);
 
