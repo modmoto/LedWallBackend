@@ -24,7 +24,7 @@ namespace LedWallBackend.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UploadImage([FromBody] ImageData imageData)
+        public async Task<IActionResult> Index([FromBody] ImageData imageData)
         {
             var bmp = ShrinkImageTo(imageData, 400, 250);
             var base64String = ToBase64(bmp);
@@ -33,7 +33,7 @@ namespace LedWallBackend.Controllers
             var picture = Picture.Create(colors, base64String);
             await _repository.SavePictureAsync(picture);
 
-            return Redirect("/");
+            return View();
         }
 
         private static string ToBase64(Bitmap bmp)

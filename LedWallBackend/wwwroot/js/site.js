@@ -112,10 +112,11 @@ saveButton.onclick = function uploadImage(event) {
 
     $.ajax({
         type: 'POST',
-        url: "../../Home/UploadImage",
+        url: "../../Home/Index",
         data: JSON.stringify({ imageAsBase64: postImage }),
         contentType: 'application/json; charset=utf-8'
     });
+    location.href = location.href;
 };
 
 const fabButton = document.getElementById('fab-button');

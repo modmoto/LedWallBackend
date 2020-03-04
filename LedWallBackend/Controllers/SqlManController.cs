@@ -29,7 +29,7 @@ namespace LedWallBackend.Controllers
             var pic = await _repository.LoadPicture(pictureId);
             pic.MakeDecision(state);
             await _repository.SavePictureAsync(pic);
-            return Redirect("/");
+            return Redirect("/SqlMan");
         }
     }
 }
