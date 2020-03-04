@@ -1,3 +1,5 @@
+using LedWallBackend.Controllers;
+using LedWallBackend.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,6 +11,7 @@ namespace LedWallBackend
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddTransient<IGodRepository, GodRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

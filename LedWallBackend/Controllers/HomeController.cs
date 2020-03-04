@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Threading.Tasks;
+using LedWallBackend.Domain;
+using LedWallBackend.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LedWallBackend.Controllers
@@ -36,6 +38,7 @@ namespace LedWallBackend.Controllers
 
             var picture = Picture.Create(colors);
             await _repository.SavePictureAsync(picture);
+            await _repository.SaveRawPictureAsync(imageData, picture.Id);
 
             return Redirect("/");
         }

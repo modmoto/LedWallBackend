@@ -1,4 +1,4 @@
-namespace LedWallBackend.Controllers
+namespace LedWallBackend.Domain
 {
     public class ImageData
     {
