@@ -29,8 +29,6 @@ window.addEventListener('load', function () {
                 context.strokeStyle = colorPicker.color.hexString;
                 context.lineWidth = window.innerWidth / 40;
                 context.lineCap = "round";
-                context.width = window.innerWidth;
-                context.height = window.innerHeight;
 
                 context.stroke();
             }
