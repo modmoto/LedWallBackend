@@ -35,7 +35,7 @@ window.addEventListener('load', function () {
             if (this.isDrawing) {
                 context.lineTo(coors.x - (window.innerWidth * 0.1), coors.y - (window.innerHeight * 0.1));
                 context.strokeStyle = colorPicker.color.hexString;
-                context.lineWidth = window.innerWidth / 40;
+                context.lineWidth = window.innerWidth * 0.08;
                 context.lineCap = "round";
 
                 context.stroke();
