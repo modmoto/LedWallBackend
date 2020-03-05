@@ -1,10 +1,12 @@
 ﻿using System;
-using System.Drawing;
 using System.IO;
 using System.Threading.Tasks;
 using LedWallBackend.Domain;
 using LedWallBackend.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
+using SixLabors.ImageSharp.Processing;
 
 namespace LedWallBackend.Controllers
 {
@@ -24,40 +26,36 @@ namespace LedWallBackend.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Index([FromBody] ImageData imageData)
+        public async Task<IActionResult> UploadImage([FromBody] ImageData imageData)
         {
-            var bmp = ShrinkImageTo(imageData, 400, 250);
-            var base64String = ToBase64(bmp);
-            var colors = MapToColorDto(bmp);
+            var byteBuffer = Convert.FromBase64String(imageData.ImageAsBase64);
+            var ms = new MemoryStream(byteBuffer);
+
+            var image = Image.Load(ms);
+            image.Mutate(x => x
+                .Resize(400, 250));
+
+            var pixelImage = image.CloneAs<Rgba32>();
+
+            var base64String = ToBase64(pixelImage);
+            var colors = MapToColorDto(pixelImage);
 
             var picture = Picture.Create(colors, base64String);
             await _repository.SavePictureAsync(picture);
 
-            return View();
+            return Redirect("/");
         }
 
-        private static string ToBase64(Bitmap bmp)
+        private static string ToBase64(Image bmp)
         {
             var stream = new MemoryStream();
-            bmp.Save(stream, System.Drawing.Imaging.ImageFormat.Bmp);
+            bmp.SaveAsPng(stream);
             var imageBytes = stream.ToArray();
             var base64String = Convert.ToBase64String(imageBytes);
             return base64String;
         }
 
-        private static Bitmap ShrinkImageTo(ImageData imageData, int width, int height)
-        {
-            var byteBuffer = Convert.FromBase64String(imageData.ImageAsBase64);
-            var ms = new MemoryStream(byteBuffer);
-            var image = Image.FromStream(ms);
-
-            var newImage = new Bitmap(width, height);
-            Graphics.FromImage(newImage).DrawImage(image, 0, 0, width, height);
-            var bmp = new Bitmap(newImage);
-            return bmp;
-        }
-
-        private static Pixel[][] MapToColorDto(Bitmap bitmap)
+        private static Pixel[][] MapToColorDto(Image<Rgba32> bitmap)
         {
             var matrix = new Pixel[bitmap.Width][];
             for (var i = 0; i <= bitmap.Width - 1; i++)
@@ -67,9 +65,9 @@ namespace LedWallBackend.Controllers
                 {
                     matrix[i][j] = new Pixel
                     {
-                        Red = bitmap.GetPixel(i, j).R,
-                        Green = bitmap.GetPixel(i, j).G,
-                        Blue = bitmap.GetPixel(i, j).B
+                        Red = bitmap[i, j].R,
+                        Green = bitmap[i, j].G,
+                        Blue = bitmap[i, j].B
                     };
                 }
             }
