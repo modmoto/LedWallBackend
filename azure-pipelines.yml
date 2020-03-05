@@ -2,8 +2,7 @@ trigger:
 - master
 
 pool:
-  name: Azure Pipelines
-  vmImage: ubuntu-18.04
+  vmImage: 'windows-latest'
 
 variables:
   solution: '**/*.sln'
@@ -11,21 +10,23 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- task: DotNetCoreCLI@2
-  displayName: Restore
-  inputs:
-    command: restore
+- task: NuGetToolInstaller@1
 
-- task: DotNetCoreCLI@2
-    displayName: 'dotnet build'
-    inputs:
-      command: build
-
-- task: DotNetCoreCLI@2
-  displayName: 'dotnet test'
+- task: NuGetCommand@2
   inputs:
-    command: test
-    arguments: '--configuration $(BuildConfiguration)'
+    restoreSolution: '$(solution)'
+
+- task: VSBuild@1
+  inputs:
+    solution: '$(solution)'
+    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+
+- task: VSTest@2
+  inputs:
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
 
 - task: Docker@2
   inputs:
