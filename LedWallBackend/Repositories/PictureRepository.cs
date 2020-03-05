@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using LedWallBackend.Domain;
-using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace LedWallBackend.Repositories
@@ -11,9 +10,9 @@ namespace LedWallBackend.Repositories
     {
         private readonly IMongoDatabase _context;
 
-        public PictureRepository()
+        public PictureRepository(DbConnctionInfo info)
         {
-            var client = new MongoClient("mongodb://localhost:27017/");
+            var client = new MongoClient(info.ConnectionString);
             _context = client.GetDatabase("PictureDb");
         }
 
