@@ -8,6 +8,7 @@ ProjectSection(SolutionItems) = preProject
 	Dockerfile = Dockerfile
 	.gitignore = .gitignore
 	docker-compose.yml = docker-compose.yml
+	.dockerignore = .dockerignore
 EndProjectSection
 EndProject
 Global
