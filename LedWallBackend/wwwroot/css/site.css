@@ -15,18 +15,66 @@ canvas {
     left: 10%;
 }
 
-.fab-color-picker{
-    bottom:6%;
+@media screen and (orientation: portrait) {
+    .fab-color-picker{
+        right:6%;
+        bottom:4%;
+    }
+
+    .imageInput{
+        right:32%;
+        bottom:4%;
+        background-color: #9d9d9d;
+    }
+
+    .btnSendPictureToGrenke{
+        right:59%;
+        bottom:4%;
+        background-color: #9d9d9d;
+    }
+
+    .accept{
+        right:6%;
+        bottom:4%;
+        background-color: #5cb85c;
+    }
+
+    .reject{
+        right:32%;
+        bottom:4%;
+        background-color: #b83a39;
+    }
 }
 
-.accept{
-    bottom:6%;
-    background-color: #5cb85c;
-}
+@media screen and (orientation: landscape) {
+    .fab-color-picker{
+        bottom:6%;
+        right:4%;
+    }
 
-.reject{
-    bottom:32%;
-    background-color: #b83a39;
+    .imageInput{
+        bottom:32%;
+        right:4%;
+        background-color: #9d9d9d;
+    }
+
+    .btnSendPictureToGrenke{
+        bottom:59%;
+        right:4%;
+        background-color: #9d9d9d;
+    }
+
+    .accept{
+        bottom:6%;
+        right:4%;
+        background-color: #5cb85c;
+    }
+
+    .reject{
+        bottom:32%;
+        right:4%;
+        background-color: #b83a39;
+    }
 }
 
 .fab-color-wheel{
@@ -37,32 +85,21 @@ canvas {
     right:4%;
 }
 
-.btnSendPictureToGrenke{
-    bottom:59%;
-    background-color: #9d9d9d;
-}
-
 .imageInputField {
     visibility: hidden;
 }
 
 .rounded-button {
     position:fixed;
-    width:11%;
-    height:21%;
+    width: 150px;
+    height: 150px;
     border-radius:100%;
     text-align: center;
     border-color: #333333;
     border-style: solid;
     border-width: 5px;
-    font-size: 5em;
+    font-size: 65px;
     font-weight: bold;
-    right:4%;
-}
-
-.imageInput{
-    bottom:32%;
-    background-color: #9d9d9d;
 }
 
 .loader {
