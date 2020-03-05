@@ -39,6 +39,13 @@ namespace LedWallBackend
             {
                 endpoints.MapDefaultControllerRoute();
             });
+
+            app.UseCors(
+                options => options
+                    .AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+            );
         }
     }
 }
