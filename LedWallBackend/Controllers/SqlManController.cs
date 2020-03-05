@@ -2,9 +2,7 @@ using System;
 using System.Threading.Tasks;
 using LedWallBackend.Domain;
 using LedWallBackend.Repositories;
-using LedWallBackend.Views.SqlMan;
 using Microsoft.AspNetCore.Mvc;
-using MongoDB.Driver;
 
 namespace LedWallBackend.Controllers
 {
@@ -23,12 +21,7 @@ namespace LedWallBackend.Controllers
         public async Task<IActionResult> Index()
         {
             var pic = await _repository.LoadFirstUndecidedPicture();
-            var sqlManViewModel = new SqlManViewModel
-            {
-                Picture = pic,
-                ConnString = _infoConnectionString
-            };
-            return View(sqlManViewModel);
+            return View(pic);
         }
 
         [HttpPost]

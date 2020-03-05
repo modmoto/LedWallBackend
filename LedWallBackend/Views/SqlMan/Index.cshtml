@@ -1,15 +1,14 @@
-@model LedWallBackend.Views.SqlMan.SqlManViewModel
-@if (Model.Picture == null)
+@model LedWallBackend.Domain.Picture
+@if (Model == null)
 {
     <h2>Keine Bilder mehr</h2>
-    <h2>@Model.ConnString</h2>
 }
 else
 {
-    <img width="100%" src="data:image/png;base64,@Model.Picture.AsBase64" alt="sorry"/>
+    <img width="100%" src="data:image/png;base64,@Model.AsBase64" alt="sorry"/>
 
     <form method="post">
-        <input type="text" style="visibility: hidden;" name="pictureId" value="@Model.Picture.Id"/>
+        <input type="text" style="visibility: hidden;" name="pictureId" value="@Model.Id"/>
         <button class="imageInput" name="button" value="Rejected">Deny</button>
         <button class="fab-color-picker" name="button" value="Approved">Accept</button>
     </form>
