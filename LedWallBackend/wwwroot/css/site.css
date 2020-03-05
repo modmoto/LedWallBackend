@@ -80,8 +80,9 @@ canvas {
 .loader {
     visibility: hidden;
     position:fixed;
-    right:50%;
-    bottom:50%;
+    z-index: 99;
+    left: 45%;
+    top: 45%;
     border: 16px solid #f3f3f3;
     border-top: 16px solid #3498db;
     border-radius: 50%;
