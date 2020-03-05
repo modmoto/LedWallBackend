@@ -9,12 +9,10 @@ namespace LedWallBackend.Controllers
     public class SqlManController : Controller
     {
         private readonly IPictureRepository _repository;
-        private readonly string _infoConnectionString;
 
-        public SqlManController(IPictureRepository repository, DbConnctionInfo info)
+        public SqlManController(IPictureRepository repository)
         {
             _repository = repository;
-            _infoConnectionString = info.ConnectionString;
         }
 
         [HttpGet]
