@@ -9,7 +9,11 @@ else
 
     <form method="post">
         <input type="text" style="visibility: hidden;" name="pictureId" value="@Model.Id"/>
-        <button class="imageInput" name="button" value="Rejected">Deny</button>
-        <button class="fab-color-picker" name="button" value="Approved">Accept</button>
+        <button class="imageInput" name="button" value="Rejected">
+            <i class="fas fa-times"></i>
+        </button>
+        <button class="fab-color-picker" name="button" value="Approved">
+            <i class="fas fa-check"></i>
+        </button>
     </form>
 }
