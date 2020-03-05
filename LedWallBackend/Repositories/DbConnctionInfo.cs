@@ -4,7 +4,7 @@ namespace LedWallBackend.Repositories
     {
         public DbConnctionInfo(string connectionString)
         {
-            ConnectionString = !string.IsNullOrEmpty(connectionString) ? connectionString : "mongodb://h2865571.stratoserver.net:4001/?readPreference=primary&ssl=false";
+            ConnectionString = !string.IsNullOrEmpty(connectionString) ? connectionString : "mongodb+srv://mongoDbTestUser:meinTestPw@cluster0-xhbcb.azure.mongodb.net/test?retryWrites=true&w=majority";
         }
 
         public string ConnectionString { get; }
