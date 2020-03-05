@@ -21,7 +21,7 @@ namespace LedWallBackend
             services.AddTransient<IPictureRepository, PictureRepository>();
 
             var mongoConnectionString = _configuration.GetValue<string>("mongoConnectionString");
-            services.AddSingleton(new DbConnctionInfo(mongoConnectionString.Replace("'", "")));
+            services.AddSingleton(new DbConnctionInfo(mongoConnectionString?.Replace("'", "")));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -37,13 +37,6 @@ namespace LedWallBackend
             {
                 endpoints.MapDefaultControllerRoute();
             });
-
-            app.UseCors(
-                options => options
-                    .AllowAnyOrigin()
-                    .AllowAnyMethod()
-                    .AllowAnyHeader()
-            );
         }
     }
 }

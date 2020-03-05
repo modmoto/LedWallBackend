@@ -106,16 +106,37 @@ window.addEventListener('load', function () {
 
 }, false);
 
+function disableButtons() {
+    const fabButton = document.getElementById('fab-button');
+    const uploadButton = document.getElementById('imageInputButton');
+    const saveButton = document.getElementById('btnSendPictureToGrenke');
+
+    uploadButton.disabled = true;
+    fabButton.disabled = true;
+    saveButton.disabled = true;
+}
+
 const saveButton = document.getElementById('btnSendPictureToGrenke');
 saveButton.onclick = function uploadImage(event) {
     let dataURL = canvas.toDataURL("image/png");
     const postImage = dataURL.replace('data:image/png;base64,', '');
 
+    disableButtons();
+
+    const loader = document.getElementById('loader');
+    loader.style.visibility = 'visible';
+
     $.ajax({
         type: 'POST',
         url: "../../Home/UploadImage",
         data: JSON.stringify({ imageAsBase64: postImage }),
-        contentType: 'application/json; charset=utf-8'
+        contentType: 'application/json; charset=utf-8',
+        error: function() {
+            location.href = location.href;
+        },
+        success:function() {
+            location.href = location.href;
+        }
     });
 };
 
