@@ -7,8 +7,8 @@ document.ontouchmove = function(event){
     event.preventDefault();
 };
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+canvas.width = window.innerWidth * 0.8;
+canvas.height = window.innerHeight * 0.8;
 
 context.fillStyle = "black";
 context.fillRect(0, 0, canvas.width, canvas.height);

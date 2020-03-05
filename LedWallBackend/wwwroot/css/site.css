@@ -11,8 +11,8 @@ body {
 canvas {
     display:block;
     position:fixed;
-    top: 0;
-    bottom: 0;
+    top: 10%;
+    left: 10%;
 }
 
 .fab-color-picker{
