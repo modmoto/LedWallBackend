@@ -28,14 +28,19 @@ window.addEventListener('load', function () {
         isDrawing: false,
         touchstart: function (coors) {
             context.beginPath();
-            context.moveTo(coors.x - (window.innerWidth * 0.1), coors.y- (window.innerHeight * 0.1));
+            context.moveTo(coors.x - (window.innerWidth * 0.1), coors.y - (window.innerHeight * 0.1));
             this.isDrawing = true;
         },
         touchmove: function (coors) {
             if (this.isDrawing) {
                 context.lineTo(coors.x - (window.innerWidth * 0.1), coors.y - (window.innerHeight * 0.1));
+
+                if(window.innerHeight < window.innerWidth){
+                    context.lineWidth = window.innerWidth * 0.03;
+                } else {
+                    context.lineWidth = window.innerHeight * 0.03;
+                }
                 context.strokeStyle = colorPicker.color.hexString;
-                context.lineWidth = window.innerWidth * 0.08;
                 context.lineCap = "round";
 
                 context.stroke();
