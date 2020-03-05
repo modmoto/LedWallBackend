@@ -16,40 +16,29 @@ canvas {
 }
 
 .fab-color-picker{
-    position:fixed;
-    width:11%;
-    height:21%;
     bottom:6%;
-    right:4%;
-    border-radius:100%;
-    border-color: #333333;
-    border-style: solid;
-    border-width: 5px;
-    display: table-cell;
-    text-align: center;
-    font-size: 5em;
+}
+
+.accept{
+    bottom:6%;
+    background-color: #5cb85c;
+}
+
+.reject{
+    bottom:32%;
+    background-color: #b83a39;
 }
 
 .fab-color-wheel{
     position:fixed;
     display: none;
+    z-index: 99;
     top:4%;
     right:4%;
 }
 
 .btnSendPictureToGrenke{
-    position:fixed;
-    width:11%;
-    height:21%;
     bottom:59%;
-    right:4%;
-    border-radius:100%;
-    text-align: center;
-    border-color: #333333;
-    border-style: solid;
-    border-width: 5px;
-    font-size: 5em;;
-    font-weight: bold;
     background-color: #9d9d9d;
 }
 
@@ -57,12 +46,10 @@ canvas {
     visibility: hidden;
 }
 
-.imageInput{
+.rounded-button {
     position:fixed;
     width:11%;
     height:21%;
-    bottom:32%;
-    right:4%;
     border-radius:100%;
     text-align: center;
     border-color: #333333;
@@ -70,6 +57,11 @@ canvas {
     border-width: 5px;
     font-size: 5em;
     font-weight: bold;
+    right:4%;
+}
+
+.imageInput{
+    bottom:32%;
     background-color: #9d9d9d;
 }
 
