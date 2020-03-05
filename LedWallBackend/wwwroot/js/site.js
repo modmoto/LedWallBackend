@@ -13,10 +13,17 @@ canvas.height = window.innerHeight * 0.8;
 context.fillStyle = "black";
 context.fillRect(0, 0, canvas.width, canvas.height);
 
-const randomColor = "#" + Math.floor(Math.random()*16777215).toString(16);
 const colorPicker = new iro.ColorPicker('#color-picker-container', {
     width: window.innerWidth * 0.31,
-    color: randomColor
+    color: {
+        r: Math.floor(Math.random() * 256),
+        g: Math.floor(Math.random() * 256),
+        b: Math.floor(Math.random() * 256),
+        a: 1,
+        saturation: 100,
+        hue: 360
+    },
+    wheelAngle: 360
 });
 
 const cpContainer = document.getElementById('color-picker-container');
