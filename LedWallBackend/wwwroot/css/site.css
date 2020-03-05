@@ -15,7 +15,23 @@ canvas {
     left: 10%;
 }
 
+.rounded-button {
+    position:fixed;
+    border-radius:100%;
+    text-align: center;
+    border-color: #333333;
+    border-style: solid;
+    border-width: 5px;
+    font-weight: bold;
+}
+
 @media screen and (orientation: portrait) {
+    .rounded-button-size {
+        width: 22%;
+        height: 11%;
+        font-size: 3em;
+    }
+
     .fab-color-picker{
         right:6%;
         bottom:4%;
@@ -47,6 +63,12 @@ canvas {
 }
 
 @media screen and (orientation: landscape) {
+    .rounded-button-size {
+        width: 12%;
+        height: 22%;
+        font-size: 3em;
+    }
+
     .fab-color-picker{
         bottom:6%;
         right:4%;
@@ -87,19 +109,6 @@ canvas {
 
 .imageInputField {
     visibility: hidden;
-}
-
-.rounded-button {
-    position:fixed;
-    width: 150px;
-    height: 150px;
-    border-radius:100%;
-    text-align: center;
-    border-color: #333333;
-    border-style: solid;
-    border-width: 5px;
-    font-size: 65px;
-    font-weight: bold;
 }
 
 .loader {
