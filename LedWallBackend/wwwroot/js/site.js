@@ -26,12 +26,12 @@ window.addEventListener('load', function () {
         isDrawing: false,
         touchstart: function (coors) {
             context.beginPath();
-            context.moveTo(coors.x, coors.y);
+            context.moveTo(coors.x - (window.innerWidth * 0.1), coors.y- (window.innerHeight * 0.1));
             this.isDrawing = true;
         },
         touchmove: function (coors) {
             if (this.isDrawing) {
-                context.lineTo(coors.x, coors.y);
+                context.lineTo(coors.x - (window.innerWidth * 0.1), coors.y - (window.innerHeight * 0.1));
                 context.strokeStyle = colorPicker.color.hexString;
                 context.lineWidth = window.innerWidth / 40;
                 context.lineCap = "round";
