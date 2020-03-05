@@ -6,6 +6,10 @@ document.body.addEventListener('touchmove', function(e){ e.preventDefault(); });
 screen.orientation.lock();
 screen.lockOrientation("landscape");
 
+document.ontouchmove = function(event){
+    event.preventDefault();
+};
+
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
