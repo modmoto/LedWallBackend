@@ -32,6 +32,27 @@ canvas { display:block; }
     position:fixed;
     width:11%;
     height:21%;
+    bottom:59%;
+    right:4%;
+    padding-top: 1.8%;
+    border-radius:100%;
+    text-align: center;
+    border-color: #333333;
+    border-style: solid;
+    border-width: 5px;
+    font-size: 2em;
+    font-weight: bold;
+    background-color: #9d9d9d;
+}
+
+.imageInputField {
+    visibility: hidden;
+}
+
+.imageInput{
+    position:fixed;
+    width:11%;
+    height:21%;
     bottom:32%;
     right:4%;
     padding-top: 1.8%;

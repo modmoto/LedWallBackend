@@ -129,6 +129,29 @@ fabButton.onclick = function openColorPicker(event) {
     }
 };
 
+const uploadButton = document.getElementById('imageInputButton');
+uploadButton.onclick = function openColorPicker(event) {
+    const imageInput = document.getElementById('imageInput');
+    imageInput.click();
+};
+
+const imageInput = document.getElementById('imageInput');
+imageInput.onchange = function (e) {
+    if (e.target.files && e.target.files[0]) {
+        const image = new Image();
+        image.height = canvas.height;
+        image.width = canvas.width;
+        image.src = URL.createObjectURL(e.target.files[0]);
+        image.onload = function() {
+            context.drawImage(image, 0, 0, image.width, image.height);
+        }
+    }
+};
+
+imageInput.onclick = function () {
+    this.value = null;
+};
+
 fabButton.style.backgroundColor = colorPicker.color.hexString;
 
 function onColorChange(color) {
