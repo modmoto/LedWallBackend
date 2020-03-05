@@ -4,7 +4,7 @@ namespace LedWallBackend.Repositories
     {
         public DbConnctionInfo(string connectionString)
         {
-            ConnectionString = !string.IsNullOrEmpty(connectionString) ? connectionString : "mongodb+srv://mongoDbTestUser:meinTestPw@cluster0-xhbcb.azure.mongodb.net/test?retryWrites=true&w=majority";
+            ConnectionString = !string.IsNullOrEmpty(connectionString) ? connectionString : "mongodb://localhost:27017/";
         }
 
         public string ConnectionString { get; }
