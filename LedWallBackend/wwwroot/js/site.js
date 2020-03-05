@@ -3,9 +3,6 @@ const context = canvas.getContext('2d');
 
 document.body.addEventListener('touchmove', function(e){ e.preventDefault(); });
 
-screen.orientation.lock();
-screen.lockOrientation("landscape");
-
 document.ontouchmove = function(event){
     event.preventDefault();
 };
