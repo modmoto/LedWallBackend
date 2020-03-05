@@ -22,8 +22,7 @@ const colorPicker = new iro.ColorPicker('#color-picker-container', {
         a: 1,
         saturation: 100,
         hue: 360
-    },
-    wheelAngle: 360
+    }
 });
 
 const cpContainer = document.getElementById('color-picker-container');
