@@ -8,17 +8,16 @@ namespace LedWallBackend.Repositories
 {
     public class PictureRepository : IPictureRepository
     {
-        private readonly IMongoDatabase _context;
+        private readonly DbConnctionInfo _info;
 
         public PictureRepository(DbConnctionInfo info)
         {
-            var client = new MongoClient(info.ConnectionString);
-            _context = client.GetDatabase("PictureDb");
+            _info = info;
         }
 
         public async Task SavePictureAsync(Picture picture)
         {
-            var collection = _context.GetCollection<Picture>("Pictures");
+            var collection = GetContext().GetCollection<Picture>("Pictures");
             await collection.ReplaceOneAsync(
                 p => p.Id == picture.Id,
                 options: new ReplaceOptions { IsUpsert = true },
@@ -27,23 +26,29 @@ namespace LedWallBackend.Repositories
 
         public async Task<Picture> LoadFirstUndecidedPicture()
         {
-            var collection = _context.GetCollection<Picture>("Pictures");
+            var collection = GetContext().GetCollection<Picture>("Pictures");
             var undecidedPicture = await collection.Find(p => p.State == ApprovalState.Undecided).FirstOrDefaultAsync();
             return undecidedPicture;
         }
 
         public async Task<IEnumerable<Picture>> LoadApprovedPictures()
         {
-            var collection = _context.GetCollection<Picture>("Pictures");
+            var collection = GetContext().GetCollection<Picture>("Pictures");
             var undecidedPictures = await collection.FindAsync(p => p.State == ApprovalState.Approved);
             return undecidedPictures.ToList();
         }
 
         public async Task<Picture> LoadPicture(Guid pictureId)
         {
-            var collection = _context.GetCollection<Picture>("Pictures");
+            var collection = GetContext().GetCollection<Picture>("Pictures");
             var undecidedPictures = collection.Find(p => p.Id == pictureId);
             return await undecidedPictures.FirstOrDefaultAsync();
+        }
+
+        private IMongoDatabase GetContext()
+        {
+            var client = new MongoClient(_info.ConnectionString);
+            return client.GetDatabase("PictureDb");
         }
     }
 }
