@@ -24,7 +24,7 @@ steps:
 - task: Docker@2
   inputs:
     containerRegistry: 'blood-bowl-league'
-    repository: 'modmoto/led-backendwall'
+    repository: 'modmoto/led-wall'
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
     buildContext: '.'
