@@ -3,8 +3,8 @@ const context = canvas.getContext('2d');
 
 document.body.addEventListener('touchmove', function(e){ e.preventDefault(); });
 
-canvas.width = window.innerWidth * 0.8;
-canvas.height = window.innerHeight * 0.8;
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
 context.fillStyle = "black";
 context.fillRect(0, 0, canvas.width, canvas.height);
@@ -28,12 +28,12 @@ window.addEventListener('load', function () {
         isDrawing: false,
         touchstart: function (coors) {
             context.beginPath();
-            context.moveTo(coors.x - (window.innerWidth * 0.1), coors.y - (window.innerHeight * 0.1));
+            context.moveTo(coors.x , coors.y );
             this.isDrawing = true;
         },
         touchmove: function (coors) {
             if (this.isDrawing) {
-                context.lineTo(coors.x - (window.innerWidth * 0.1), coors.y - (window.innerHeight * 0.1));
+                context.lineTo(coors.x, coors.y);
 
                 if(window.innerHeight < window.innerWidth){
                     context.lineWidth = window.innerWidth * 0.03;

@@ -8,8 +8,6 @@
 canvas {
     display:block;
     position:fixed;
-    top: 10%;
-    left: 10%;
 }
 
 .rounded-button {
