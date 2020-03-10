@@ -11,6 +11,7 @@ canvas {
 }
 
 .rounded-button {
+    z-index: 2;
     border-radius: 100%;
     text-align: center;
     border-color: #333333;
@@ -80,12 +81,19 @@ canvas {
     visibility: hidden;
 }
 
-.loader {
+.loaderContainer {
     visibility: hidden;
-    position:fixed;
     z-index: 99;
-    left: 45%;
-    top: 45%;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    position:fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.loader {
     border: 16px solid #f3f3f3;
     border-top: 16px solid #3498db;
     border-radius: 50%;
