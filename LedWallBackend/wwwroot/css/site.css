@@ -11,87 +11,62 @@ canvas {
 }
 
 .rounded-button {
-    position:fixed;
-    border-radius:100%;
+    border-radius: 100%;
     text-align: center;
     border-color: #333333;
     border-style: solid;
-    border-width: 5px;
+    border-width: 3px;
     font-weight: bold;
 }
 
 @media screen and (orientation: portrait) {
+    .button-container {
+        flex-direction: row;
+        right: 8%;
+        left: 10%;
+        right: 10%;
+        bottom: 4%;
+    }
+
     .rounded-button-size {
-        width: 22%;
-        height: 11%;
-        font-size: 3em;
-    }
-
-    .fab-color-picker{
-        right:6%;
-        bottom:4%;
-    }
-
-    .imageInput{
-        right:32%;
-        bottom:4%;
-        background-color: #9d9d9d;
-    }
-
-    .btnSendPictureToGrenke{
-        right:59%;
-        bottom:4%;
-        background-color: #9d9d9d;
-    }
-
-    .accept{
-        right:6%;
-        bottom:4%;
-        background-color: #5cb85c;
-    }
-
-    .reject{
-        right:32%;
-        bottom:4%;
-        background-color: #b83a39;
+        font-size: 8vh;
     }
 }
 
 @media screen and (orientation: landscape) {
+    .button-container {
+        flex-direction: column;
+        right: 4%;
+        bottom: 7%;
+        top: 7%;
+    }
+
     .rounded-button-size {
-        width: 12%;
-        height: 22%;
-        font-size: 3em;
+        font-size: 9vw;
     }
+}
 
-    .fab-color-picker{
-        bottom:6%;
-        right:4%;
-    }
+.button-container {
+    float: right;
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+}
 
-    .imageInput{
-        bottom:32%;
-        right:4%;
-        background-color: #9d9d9d;
-    }
+.imageInput {
+    background-color: #9d9d9d;
+}
 
-    .btnSendPictureToGrenke{
-        bottom:59%;
-        right:4%;
-        background-color: #9d9d9d;
-    }
+.btnSendPictureToGrenke {
+    background-color: #9d9d9d;
+}
 
-    .accept{
-        bottom:6%;
-        right:4%;
-        background-color: #5cb85c;
-    }
+.accept {
+    background-color: #5cb85c;
+}
 
-    .reject{
-        bottom:32%;
-        right:4%;
-        background-color: #b83a39;
-    }
+.reject {
+    background-color: #b83a39;
 }
 
 .fab-color-wheel{

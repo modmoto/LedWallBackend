@@ -10,7 +10,7 @@ context.fillStyle = "black";
 context.fillRect(0, 0, canvas.width, canvas.height);
 
 const colorPicker = new iro.ColorPicker('#color-picker-container', {
-    width: window.innerWidth * 0.31,
+    width: window.innerWidth > window.innerHeight ? window.innerHeight * 0.5 : window.innerWidth * 0.5,
     color: {
         r: Math.floor(Math.random() * 256),
         g: Math.floor(Math.random() * 256),
