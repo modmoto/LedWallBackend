@@ -11,7 +11,6 @@ canvas {
 }
 
 .rounded-button {
-    z-index: 2;
     border-radius: 100%;
     text-align: center;
     border-color: #333333;
