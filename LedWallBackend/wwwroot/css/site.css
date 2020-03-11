@@ -30,6 +30,10 @@ canvas {
     .rounded-button-size {
         font-size: 8vh;
     }
+
+    .fab-color-wheel{
+        bottom: 22%;
+    }
 }
 
 @media screen and (orientation: landscape) {
@@ -42,6 +46,10 @@ canvas {
 
     .rounded-button-size {
         font-size: 9vw;
+    }
+
+    .fab-color-wheel{
+        top:4%;
     }
 }
 
@@ -72,7 +80,6 @@ canvas {
     position:fixed;
     display: none;
     z-index: 2;
-    top:4%;
     right:4%;
 }
 
