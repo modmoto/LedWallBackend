@@ -1,14 +1,14 @@
 ﻿const canvas = document.getElementById('sketchpad');
 const context = canvas.getContext('2d');
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+canvas.width = window.outerWidth;
+canvas.height = window.outerHeight;
 
 context.fillStyle = "black";
 context.fillRect(0, 0, canvas.width, canvas.height);
 
 const colorPicker = new iro.ColorPicker('#color-picker-container', {
-    width: window.innerWidth > window.innerHeight ? window.innerHeight * 0.6 : window.innerWidth * 0.6,
+    width: window.outerWidth > window.outerHeight ? window.outerHeight * 0.6 : window.outerWidth * 0.6,
     color: {
         r: Math.floor(Math.random() * 256),
         g: Math.floor(Math.random() * 256),
@@ -33,10 +33,10 @@ window.addEventListener('load', function () {
             if (this.isDrawing) {
                 context.lineTo(coors.x, coors.y);
 
-                if(window.innerHeight < window.innerWidth){
-                    context.lineWidth = window.innerWidth * 0.03;
+                if(window.outerHeight < window.outerWidth){
+                    context.lineWidth = window.outerWidth * 0.03;
                 } else {
-                    context.lineWidth = window.innerHeight * 0.03;
+                    context.lineWidth = window.outerHeight * 0.03;
                 }
                 context.strokeStyle = colorPicker.color.hexString;
                 context.lineCap = "round";
