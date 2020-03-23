@@ -35,3 +35,8 @@ steps:
     tags: |
       $(System.PullRequest.PullRequestId)
       latest
+
+- task: CopyFiles@2
+  inputs:
+    Contents: '**/*pr-number.info'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
