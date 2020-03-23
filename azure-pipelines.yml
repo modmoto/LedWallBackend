@@ -22,7 +22,7 @@ steps:
     command: 'test'
 - task: replacetokens@3
   inputs:
-    targetFiles: '**/*.config'
+    targetFiles: '**/*.number'
     encoding: 'auto'
     writeBOM: true
     actionOnMissing: 'warn'
