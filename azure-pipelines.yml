@@ -20,10 +20,15 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: 'test'
-    
-- task: CmdLine@2
+- task: replacetokens@3
   inputs:
-    script: 'echo "$(System.PullRequest.PullRequestNumber)" >> pr-number.info'
+    targetFiles: '**/*.config'
+    encoding: 'auto'
+    writeBOM: true
+    actionOnMissing: 'warn'
+    keepToken: false
+    tokenPrefix: '#{'
+    tokenSuffix: '}#'
 
 - task: Docker@2
   inputs:
@@ -35,8 +40,3 @@ steps:
     tags: |
       $(System.PullRequest.PullRequestNumber)
       latest
-
-- task: CopyFiles@2
-  inputs:
-    Contents: '**/*pr-number.info'
-    TargetFolder: '$(Build.ArtifactStagingDirectory)'
