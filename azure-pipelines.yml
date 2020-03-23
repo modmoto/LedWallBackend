@@ -29,5 +29,5 @@ steps:
     Dockerfile: '**/Dockerfile'
     buildContext: '.'
     tags: |
-      $(Build.BuildId)
+      $(System.PullRequest.PullRequestId)
       latest
