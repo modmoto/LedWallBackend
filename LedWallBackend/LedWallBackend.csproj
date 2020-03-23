@@ -5,12 +5,22 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Content Remove="pr.number.config" />
+    </ItemGroup>
+
+    <ItemGroup>
         <PackageReference Include="MongoDB.Driver" Version="2.10.2" />
         <PackageReference Include="SixLabors.ImageSharp" Version="1.0.0-beta0007" />
     </ItemGroup>
 
     <ItemGroup>
       <_ContentIncludedByDefault Remove="wwwroot\css\site.css" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Include="pr.number.config">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>
