@@ -19,6 +19,7 @@ steps:
         Write-Host "##vso[task.setvariable variable=BuildVersioning]$(Build.BuildID)"
         Write-Host "Masterversion: $(Build.BuildID)"
       } else {
+        Write-Host "##vso[task.setvariable variable=BuildVersioning]$(System.PullRequest.PullRequestNumber)"
         Write-Host "PR-Version: $(System.PullRequest.PullRequestNumber)"
       }
 
