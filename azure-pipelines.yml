@@ -17,9 +17,9 @@ steps:
     script: |
       if(!("$(Build.Reason)".Equals("PullRequest"))){
         Write-Host "##vso[task.setvariable variable=BuildVersioning]$(Build.BuildID)"
-        Write-Line "Masterversion: $(Build.BuildID)"
+        Write-Host "Masterversion: $(Build.BuildID)"
       } else {
-        Write-Line "PR-Version: $(System.PullRequest.PullRequestNumber)"
+        Write-Host "PR-Version: $(System.PullRequest.PullRequestNumber)"
       }
 
 - task: DotNetCoreCLI@2
