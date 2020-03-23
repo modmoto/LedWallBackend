@@ -23,7 +23,7 @@ steps:
 
 - task: Docker@2
   inputs:
-    containerRegistry: 'blood-bowl-league'
+    containerRegistry: 'official-docker-modmoto'
     repository: 'modmoto/led-wall'
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
