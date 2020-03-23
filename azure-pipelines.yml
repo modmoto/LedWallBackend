@@ -15,7 +15,7 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      if(!($(Build.Reason).Equals("PullRequest"))){
+      if(!("$(Build.Reason)".Equals("PullRequest"))){
         Write-Host "##vso[task.setvariable variable=BuildVersioning]$(Build.BuildNumber)"
       }
 
