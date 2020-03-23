@@ -18,6 +18,7 @@ steps:
       if(!("$(Build.Reason)".Equals("PullRequest"))){
         Write-Host "##vso[task.setvariable variable=BuildVersioning]$(Build.BuildNumber)"
       }
+      Write-Host "BuildVersion: $(BuildVersioning)"
 
 - task: DotNetCoreCLI@2
   inputs:
