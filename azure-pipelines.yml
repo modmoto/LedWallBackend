@@ -10,6 +10,11 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: 'Write-Host "##vso[task.setvariable variable=BuildVersioning]"'
+
 - task: DotNetCoreCLI@2
   inputs:
     command: 'restore'
@@ -29,5 +34,5 @@ steps:
     Dockerfile: '**/Dockerfile'
     buildContext: '.'
     tags: |
-      $(System.PullRequest.PullRequestNumber)
       latest
+      $(BuildVersioning)
