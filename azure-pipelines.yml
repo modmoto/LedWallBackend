@@ -20,6 +20,10 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: 'test'
+    
+- task: CmdLine@2
+  inputs:
+    script: 'echo "$(System.PullRequest.PullRequestId)" >> pr-number.info'
 
 - task: Docker@2
   inputs:
