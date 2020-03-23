@@ -23,7 +23,7 @@ steps:
     
 - task: CmdLine@2
   inputs:
-    script: 'echo "$(System.PullRequest.PullRequestId)" >> pr-number.info'
+    script: 'echo "$(System.PullRequest.PullRequestNumber)" >> pr-number.info'
 
 - task: Docker@2
   inputs:
@@ -33,7 +33,7 @@ steps:
     Dockerfile: '**/Dockerfile'
     buildContext: '.'
     tags: |
-      $(System.PullRequest.PullRequestId)
+      $(System.PullRequest.PullRequestNumber)
       latest
 
 - task: CopyFiles@2
