@@ -53,7 +53,7 @@ steps:
 
 - task: CopyFiles@2
   inputs:
-    Contents: '**'
+    Contents: 'test.env'
     TargetFolder: '$(build.artifactstagingdirectory)'
     OverWrite: true
     flattenFolders: true
