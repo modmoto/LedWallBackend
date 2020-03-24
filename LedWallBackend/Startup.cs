@@ -22,7 +22,7 @@ namespace LedWallBackend
             services.AddTransient<IPictureRepository, PictureRepository>();
 
             var mongoConnectionString = _configuration.GetValue<string>("mongoConnectionString");
-            var ibimsInfo = _configuration.GetValue<string>("testEnv");
+            var ibimsInfo = _configuration.GetValue<string>("testHelloString");
 
             services.AddSingleton(new DbConnctionInfo(mongoConnectionString?.Replace("'", "")));
             services.AddSingleton(new IBimsInfo(ibimsInfo));
