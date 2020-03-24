@@ -14,4 +14,4 @@ FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
 WORKDIR /app
 COPY --from=build-env /app/out .
 
-ENTRYPOINT dotnet LedWallBackend.dll mongoConnectionString=$MONGO_CONNECTION_STRING testHelloString2=$HELLO_STRING2 testHelloString=$HELLO_STRING $TEST_ENV
+ENTRYPOINT dotnet LedWallBackend.dll mongoConnectionString=$MONGO_CONNECTION_STRING $TEST_ENV
