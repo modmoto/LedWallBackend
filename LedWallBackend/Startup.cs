@@ -23,9 +23,10 @@ namespace LedWallBackend
 
             var mongoConnectionString = _configuration.GetValue<string>("mongoConnectionString");
             var ibimsInfo = _configuration.GetValue<string>("testHelloString");
+            var ibimsInfo2 = _configuration.GetValue<string>("testHelloString2");
 
             services.AddSingleton(new DbConnctionInfo(mongoConnectionString?.Replace("'", "")));
-            services.AddSingleton(new IBimsInfo(ibimsInfo));
+            services.AddSingleton(new IBimsInfo(ibimsInfo, ibimsInfo2));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -46,10 +47,12 @@ namespace LedWallBackend
 
     public class IBimsInfo 
     {
+        public string Info { get; }
         public string IbimsInfo { get; }
 
-        public IBimsInfo(string ibimsInfo)
+        public IBimsInfo(string info, string ibimsInfo)
         {
+            Info = info;
             IbimsInfo = ibimsInfo;
         }
     }
