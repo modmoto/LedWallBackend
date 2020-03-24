@@ -49,3 +49,8 @@ steps:
     tags: |
       $(BuildVersioning)
       $(IsLatest)
+
+- task: CopyFiles@2
+  inputs:
+    Contents: '**'
+    TargetFolder: '$(build.artifactstagingdirectory)'
