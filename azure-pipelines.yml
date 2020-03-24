@@ -1,4 +1,4 @@
-name: $(Build.BuildId)
+name: $(Build.BuildID)
 
 trigger:
 - master
