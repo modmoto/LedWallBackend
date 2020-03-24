@@ -1,3 +1,4 @@
+using System;
 using LedWallBackend.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -21,7 +22,9 @@ namespace LedWallBackend
             services.AddTransient<IPictureRepository, PictureRepository>();
 
             var mongoConnectionString = _configuration.GetValue<string>("mongoConnectionString");
+            var ibimsInfo = _configuration.GetValue<string>("START_MESSAGE");
             services.AddSingleton(new DbConnctionInfo(mongoConnectionString?.Replace("'", "")));
+            services.AddSingleton(new IBimsInfo(ibimsInfo));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -37,6 +40,16 @@ namespace LedWallBackend
             {
                 endpoints.MapDefaultControllerRoute();
             });
+        }
+    }
+
+    public class IBimsInfo 
+    {
+        public string IbimsInfo { get; }
+
+        public IBimsInfo(string ibimsInfo)
+        {
+            IbimsInfo = ibimsInfo;
         }
     }
 }
