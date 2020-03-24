@@ -58,7 +58,13 @@ steps:
 
 - task: CopyFiles@2
   inputs:
-    Contents: 'test.env'
+    Contents: '**'
     TargetFolder: '$(build.artifactstagingdirectory)'
     OverWrite: true
     flattenFolders: true
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
